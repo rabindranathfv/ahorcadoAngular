@@ -12,7 +12,8 @@ export class AppComponent {
   'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S',
   'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
   intentos = 0;
-  estadoJuego;
+  estadoGanador = false;
+  estadoPerdedor = false;
   constructor() {
     this.palabraOculta = '_ '.repeat( this.palabra.length );
   }
@@ -38,10 +39,10 @@ export class AppComponent {
   ganaste() {
     console.log('la palabra oculta es ' + this.palabraOculta.split(' ').join(''));
     if ( this.intentos === 9 ) {
-      this.estadoJuego = false;
+      this.estadoPerdedor = true;
       console.log('perdiste');
     } else if ( this.palabra === this.palabraOculta.split(' ').join('')) {
-      this.estadoJuego = true;
+      this.estadoGanador = true;
       console.log('ganaste');
     }
   }
