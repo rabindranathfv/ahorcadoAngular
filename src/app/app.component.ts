@@ -12,19 +12,37 @@ export class AppComponent {
   'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S',
   'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
   intentos = 0;
+  estadoJuego;
   constructor() {
     this.palabraOculta = '_ '.repeat( this.palabra.length );
   }
 
   comprobar(letra) {
+    const existLetra = this.existeLetra(letra);
     const palabraOcultaArr = this.palabraOculta.split(' ');
     for (let index = 0; index < this.palabra.length; index++) {
       const element = this.palabra[index];
-      if ( element === letra ) {
+      if ( element === letra) {
         palabraOcultaArr[index] = letra;
       }
-
     }
+
     this.palabraOculta = palabraOcultaArr.join(' ');
+    const ganar = this.ganaste();
+  }
+
+  existeLetra(letra) {
+    return ( this.palabra.indexOf(letra) >= 0 ) ? this.intentos : this.intentos++;
+  }
+
+  ganaste() {
+    console.log('la palabra oculta es ' + this.palabraOculta.split(' ').join(''));
+    if ( this.intentos === 9 ) {
+      this.estadoJuego = false;
+      console.log('perdiste');
+    } else if ( this.palabra === this.palabraOculta.split(' ').join('')) {
+      this.estadoJuego = true;
+      console.log('ganaste');
+    }
   }
 }
